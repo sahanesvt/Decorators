@@ -9,26 +9,57 @@ namespace Decorators
     public class Condiment : CondimentDecorator
     {
         private Beverage beverage;
-        private string condimentDescription;
-        private double condimentCost;
+        private string condimentDescription = "Unknown Beverage";
+        private double condimentCost = 0;
 
-        public Condiment(Beverage beverage, string condimentDescription, double condimentCost)
+        public Condiment(Beverage beverage, string condimentDescription, double condimentCost):this(condimentDescription,condimentCost)
         {
             this.beverage = beverage;
+            setStuff();
+        }
+
+        public Condiment(string condimentDescription, double condimentCost)
+        {
             this.condimentDescription = condimentDescription;
             this.condimentCost = condimentCost;
-            setDescription();
+            setStuff();
+        }
 
+        public Condiment(Beverage beverage, Beverage condiment):this(condiment.getDescription(),condiment.cost())
+        {
+            this.beverage = beverage;
+            setStuff();
         }
 
         private void setDescription()
         {
-            description = beverage.getDescription() + ", " + condimentDescription;
+            if (beverage != null)
+            {
+                description = beverage.getDescription() + ", " + condimentDescription;
+            }
+            else
+            {
+                description = condimentDescription;
+            }
+        }
+
+        private void setCost()
+        {
+            if (beverage != null)
+            {
+                condimentCost += beverage.cost();
+            }
+        }
+
+        private void setStuff()
+        {
+            setDescription();
+            setCost();
         }
 
         public override double cost()
         {
-            return beverage.cost() + condimentCost;
+            return condimentCost;
         }
 
         public override string getDescription()
@@ -36,5 +67,6 @@ namespace Decorators
             setDescription();
             return description;
         }
+
     }
 }
