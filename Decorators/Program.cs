@@ -10,14 +10,21 @@ namespace Decorators
     {
         static void Main(string[] args)
         {
-            var beverage = new Expresso();
+            Beverage beverage = new Expresso();
             Console.WriteLine("{0} ${1}",beverage.getDescription(),beverage.cost());
 
-            var darkRoast = new DarkRoast();
-            var darkRoastWithMocha = new Mocha(darkRoast); // can't set darkRoast = new Mocha(darkRoast); ????
-            var darkRoastDoubleMocha = new Mocha(darkRoastWithMocha);
-            var darkRoastDoubleMochaWhip = new Whip(darkRoastDoubleMocha);
-            Console.WriteLine("{0} ${1}", darkRoastDoubleMochaWhip.getDescription(), darkRoastDoubleMochaWhip.cost());// loses track of description somewhere and defaults to abstract parent class default
+            Beverage beverage1 = new DarkRoast();
+            beverage1 = new Mocha(beverage1); 
+            beverage1 = new Mocha(beverage1);
+            beverage1 = new Whip(beverage1);
+            Console.WriteLine("{0} ${1}", beverage1.getDescription(), beverage1.cost());
+
+            Beverage beverage2 = new HouseBlend();
+            beverage2 = new Condiment(beverage2, "Soy", 0.15);
+            beverage2 = new Condiment(beverage2, "Mocha", 0.20);
+            beverage2 = new Condiment(beverage2, "Whip", 0.10);
+            Console.WriteLine("{0} ${1}", beverage2.getDescription(), beverage2.cost());
+
 
         }
     }

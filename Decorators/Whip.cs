@@ -13,11 +13,17 @@ namespace Decorators
         public Whip(Beverage beverage)
         {
             this.beverage = beverage;
+            setDescription();
+        }
+
+        private void setDescription()
+        {
+            description = beverage.getDescription() + ", Whip";
         }
 
         public override string getDescription()
         {
-            description = beverage.getDescription() + ", Whip";
+            setDescription();
             return description;
         }
 

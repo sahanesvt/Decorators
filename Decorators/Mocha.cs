@@ -13,12 +13,18 @@ namespace Decorators
         public Mocha(Beverage beverage)
         {
             this.beverage = beverage;
+            setDescription();
+        }
+
+        private void setDescription()
+        {
+            description = beverage.getDescription() + ", Mocha";
         }
 
         public override string getDescription()
         {
-            description = beverage.getDescription() + ", Mocha";
-            return description;
+            setDescription();
+             return description;
         }
 
         public override double cost()

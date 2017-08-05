@@ -13,11 +13,17 @@ namespace Decorators
         public SteamedMilk(Beverage beverage)
         {
             this.beverage = beverage;
+            setDescription();
+        }
+
+        private void setDescription()
+        {
+            description = beverage.getDescription() + ", Steamed Milk";
         }
 
         public override string getDescription()
         {
-            description = beverage.getDescription() + ", Steamed Milk";
+            setDescription();
             return description;
         }
 

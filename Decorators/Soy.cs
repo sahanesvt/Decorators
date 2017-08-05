@@ -13,11 +13,17 @@ namespace Decorators
         public Soy(Beverage beverage)
         {
             this.beverage = beverage;
+            setDescription();
+        }
+
+        private void setDescription()
+        {
+            description = beverage.getDescription() + ", Soy";
         }
 
         public override string getDescription()
         {
-            description = beverage.getDescription() + ", Soy";
+            setDescription();
             return description;
         }
 
